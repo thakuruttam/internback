@@ -1,0 +1,30 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "develop": "nodemon server",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client  && npm run build --prefix client"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "fast-two-sms": "^3.0.0",
+    "fast2sms": "^1.0.3",
+    "jsonwebtoken": "^9.0.1",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.4.0",
+    "twilio": "^4.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
