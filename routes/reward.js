@@ -1,6 +1,6 @@
 const express = require("express");
 const RewardController = require("../controllers/rewards");
-const auth = require("../middleware/authmiddleware");
+// const auth = require("../middleware/authmiddleware");
 
 module.exports = rewardrouter = express.Router();
 

@@ -1,17 +1,20 @@
 const express = require("express");
 const UserController = require("../controllers/user");
 const smsService = require("../common/sendOtp");
+const fetchUser = require("../middleware/fetchUser");
 
 module.exports = userrouter = express.Router();
 
-userrouter.get("/", async (req, res) => {
+userrouter.get("/", fetchUser, async (req, res) => {
   let result = await UserController.getAllUser(req, res);
   res.json(result);
 });
+
 userrouter.get("/:_id", async (req, res) => {
   let result = await UserController.getUser(req, res);
   res.json(result);
 });
+
 userrouter.post("/", async (req, res) => {
   try {
     let result = await UserController.saveUser(req, res);
@@ -39,7 +42,7 @@ userrouter.post("/otp", async (req, res) => {
 userrouter.post("/signin", async (req, res) => {
   let result = await UserController.signin(req, res);
   console.log(result);
-  res.send(result);
+  res.status(200).json({ token: result });
 });
 
 userrouter.post("/logout", async (req, res) => {

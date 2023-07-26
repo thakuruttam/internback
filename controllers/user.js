@@ -2,6 +2,7 @@ const UserServices = require("../services/user");
 const OtpServices = require("../services/otp");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { signToken } = require("../common/jwt");
 
 class _user {
   saveUser = async (req, res) => {
@@ -37,22 +38,11 @@ class _user {
 
       try {
         let result = await UserServices.post(params);
-        const token = await jwt.sign(
-          { phonenumber: result.phonenumber, role: result.role },
-          "process.env",
-          {
-            expiresIn: "2h",
-          }
-        );
-        // save user token
-        res.cookie(`Cookie`, token, {
-          httpOnly: true,
-          secure: true,
-          sameSite: "none",
-          maxAge: 5000,
+        const token = await signToken({
+          phonenumber: result.phonenumber,
+          role: result.role,
         });
-        console.log("49", result);
-        return result;
+        return token;
       } catch (error) {
         return error;
       }
@@ -65,24 +55,17 @@ class _user {
     let password = req.body.password;
     let params = { phonenumber: req.body.phonenumber };
     let usercheck = await UserServices.get(params);
+    if (!usercheck) return res.send(401).json({ message: "User not found" });
     console.log("userfound", usercheck);
     let compare = await bcrypt.compare(password, usercheck.password);
     console.log(compare);
     if (compare) {
-      const token = await jwt.sign(
-        { phonenumber: usercheck.phonenumber, role: usercheck.role },
-        "process.env",
-        {
-          expiresIn: "2h",
-        }
-      );
-      res.cookie(`Cookie`, token, {
-        maxAge: 5000,
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
+      const token = await signToken({
+        phonenumber: usercheck.phonenumber,
+        role: usercheck.role,
       });
-      return "Login Success";
+
+      return token;
     } else {
       return "Login failed check again";
     }
