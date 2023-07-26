@@ -1,4 +1,4 @@
-// const RewardServices = require("../services/rewards");
+const RewardServices = require("../services/rewards");
 const UserServices = require("../services/user");
 
 class _reward {
