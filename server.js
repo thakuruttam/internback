@@ -16,7 +16,7 @@ const mongoose = require("mongoose");
 const app = express();
 app.use(cookieParser());
 let origin =
-  "https://64c1671c0a79c63213a62c6b--deluxe-alpaca-8ca629.netlify.app";
+  "https://64c17276e696c602b967dc7e--imaginative-fox-0f03b6.netlify.app/";
 
 app.use(
   cors({
