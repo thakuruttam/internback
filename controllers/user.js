@@ -46,6 +46,9 @@ class _user {
         );
         // save user token
         res.cookie(`Cookie`, token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
           maxAge: 5000,
         });
         console.log("49", result);
@@ -75,6 +78,9 @@ class _user {
       );
       res.cookie(`Cookie`, token, {
         maxAge: 5000,
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
       });
       return "Login Success";
     } else {
