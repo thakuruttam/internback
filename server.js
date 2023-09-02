@@ -5,8 +5,6 @@ const dotenv = require("dotenv");
 
 const { MongoClient } = require("mongodb");
 const userrouter = require("./routes/user");
-const otprouter = require("./routes/otp");
-const rewardrouter = require("./routes/reward");
 
 dotenv.config({ path: "./config.env" });
 url =
@@ -28,7 +26,6 @@ app.use(express.json());
 app.use("/user", userrouter);
 
 
-rewardrouter;
 if (process.env.NODE_ENV == "production") {
     app.use(express.static("client/build"));
 }

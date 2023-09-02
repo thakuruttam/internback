@@ -1,8 +1,4 @@
 const UserServices = require("../services/user");
-const OtpServices = require("../services/otp");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { signToken } = require("../common/jwt");
 
 class _user {
     saveUser = async(req, res) => {
