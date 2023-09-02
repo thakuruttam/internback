@@ -10,36 +10,35 @@ const rewardrouter = require("./routes/reward");
 
 dotenv.config({ path: "./config.env" });
 url =
-  "mongodb+srv://uttam:9415424815@cluster0.tihpvdc.mongodb.net/?retryWrites=true&w=majority";
+    "mongodb+srv://uttam:9415424815@cluster0.tihpvdc.mongodb.net/?retryWrites=true&w=majority";
 const mongoose = require("mongoose");
 
 const app = express();
 app.use(cookieParser());
-let origin = "https://imaginative-fox-0f03b6.netlify.app";
+let origin = "http://localhost:3000";
 
 app.use(
-  cors({
-    credentials: true,
-    origin,
-  })
+    cors({
+        credentials: true,
+        origin,
+    })
 );
 app.use(express.json());
 
 app.use("/user", userrouter);
-app.use("/otp", otprouter);
-app.use("/reward", rewardrouter);
+
 
 rewardrouter;
 if (process.env.NODE_ENV == "production") {
-  app.use(express.static("client/build"));
+    app.use(express.static("client/build"));
 }
 mongoose
-  .connect(url)
-  .then((result) => {
-    app.listen(process.env.PORT, function () {
-      console.log("listening at ", process.env.PORT);
+    .connect(url)
+    .then((result) => {
+        app.listen(process.env.PORT || 8000, function() {
+            console.log("listening at ", process.env.PORT);
+        });
+    })
+    .catch((err) => {
+        console.log(err);
     });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
