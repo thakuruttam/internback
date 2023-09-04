@@ -14,7 +14,7 @@ class _user {
         let duplicate = await UserServices.get(dupparams);
         console.log("duplicate", duplicate);
         if (duplicate) {
-            return;
+            return " already exists"
         }
 
         let params = { name, phonenumber, email, degree }
