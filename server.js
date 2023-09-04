@@ -13,7 +13,7 @@ const mongoose = require("mongoose");
 
 const app = express();
 app.use(cookieParser());
-let origin = "http://localhost:3000";
+let origin = "https://theprimeweb.in";
 
 app.use(
     cors({
